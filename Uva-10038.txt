@@ -1,0 +1,35 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+int compare(const void *a, const void*b)
+{
+	return *(int*)a - *(int*)b;
+}
+int main()
+{
+	int n;
+	while (~scanf("%d", &n))
+	{
+		int s[3001] = { 0 };
+		int in;
+		int prev;
+		for (int i = 0; i<n; i++) {
+			scanf("%d", &in);
+			if (i >= 1)s[i - 1] = abs(in - prev);
+			prev = in;
+		}
+		qsort(s,n-1,sizeof(s[0]), compare);
+		int condition = 1;
+		for (int i = 0; i < n - 1; i++)
+		{
+			if (s[i] != (i + 1)) {
+				condition = 0;
+				break;
+			}
+		}
+		if(condition)
+			printf("Jolly\n");
+		else
+			printf("Not jolly\n");
+	}
+}
