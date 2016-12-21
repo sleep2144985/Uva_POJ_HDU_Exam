@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+
+#define PI 2.0*acos(0.0)
+int main() 
+{
+	double a;
+	while (~scanf("%lf", &a))
+	{
+		double p = a*a - a*a*PI / 4; //2z+y
+		double k = PI;
+		double q = a*a*PI / 6 - a*a*sqrt(3.0)/4; //w
+		double s = a*a*PI / 4 - a*a*PI / 6; //y+z+w
+		double z = p - s + q;//z
+		double y = p - 2*z;
+		double x = a*a - 4 * z - 4 * y;
+		printf("%.3lf %.3lf %.3lf\n", x, 4 * y, 4 * z);
+
+	}
+}
