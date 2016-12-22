@@ -1,0 +1,57 @@
+// ConsoleApplication6.cpp : 定義主控台應用程式的進入點。
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+
+
+int main()
+{
+	int w, h;
+	while (scanf("%d %d", &w, &h) && h)
+	{
+		int dp[200][200] = { 1 };
+		int n;
+		scanf("%d", &n);
+		while (n--)
+		{
+			int x, y;
+			scanf("%d %d", &x, &y);
+			dp[y][x] = -1;
+		}
+		for (int i = 0; i <= h; i++)
+			for (int j = 0; j <= w; j++)
+			{
+				if (j&&dp[i][j]!=-1 && dp[i][j - 1] != -1)
+					dp[i][j] += dp[i][j - 1];
+				if (i&&dp[i][j] != -1 && dp[i - 1][j] != -1)
+					dp[i][j] += dp[i - 1][j];
+			}
+
+		if (dp[h][w] <= 0) {
+			puts("There is no path.");
+		}
+		else if (dp[h][w] == 1) {
+			puts("There is one path from Little Red Riding Hood's house to her grandmother's house.");
+		}
+		else {
+			printf("There are %d paths from Little Red Riding Hood's house to her grandmother's house.\n", dp[h][w]);
+		}
+	}
+}
+/*
+1 0 0 0
+0 -1 0 0
+0 0 0 0
+0 0 0 0
+
+1 1 1 1
+1 -1 1 2
+1 1 2 4
+1 2 4 8
+排列組合
+注意 從0開始
+*/

@@ -1,0 +1,38 @@
+// ConsoleApplication6.cpp : 定義主控台應用程式的進入點。
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+
+int compare(const void* a, const void* b)
+{
+	return *(int*)a - *(int*)b;
+}
+
+int main()
+{
+	int n, r;
+	while (scanf("%d %d", &r, &n), n != -1, r != -1)
+	{
+		int arr[1002];
+		for (int i = 0; i < n; i++)
+			scanf("%d", &arr[i]);
+		qsort(arr, n, 4, compare);
+		int ans = 0,i=0;
+		while (i < n) {
+			int s = arr[i++];
+			while (i < n&&arr[i] <= s + r)i++;
+			int p = arr[i - 1];
+			while (i < n&&arr[i] <= p + r)i++;
+			ans++;
+		}
+		printf("%d\n", ans);
+	}
+
+}
+//不可取間隔 會有很多問題
+
+
