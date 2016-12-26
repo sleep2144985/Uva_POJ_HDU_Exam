@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+int sum(int* t, int b)
+{
+	int s = 0;
+	while (b>=0)
+	{
+		s += t[b];
+		b = (b&(b + 1)) - 1;
+	}
+	return s;
+}
+void add(int * t, int a, int b)
+{
+	while (a < b)
+	{
+		t[a] += 1;
+		a |= a + 1;
+	}
+}
+int query(int *t, int a, int b)
+{
+	if (a > 0)return sum(t, b) - sum(t, a -1);
+	return  sum(t, b);
+}
+int cmp(const void* a, const void* b)
+{
+	return *(int*)a - *(int*)b;
+}
+int arr[100000][2], qarr[100000][4],Ans[100000];
+int main() {
+	int T;
+	scanf("%d", &T);
+	for (int t = 1; t <= T; t++) {
+		int N, M;
+		scanf("%d%d", &N, &M);
+		for (int i = 0; i < N; i++) {
+			scanf("%d", &arr[i]);
+			arr[i][1] = i;
+		}
+		int  tree[100000] = { 0 };
+		for (int i = 0; i < M; i++)
+		{
+			int H, L, R;
+			scanf("%d%d%d", &L, &R, &H);
+			qarr[i][0] = H;
+			qarr[i][1] = L;
+			qarr[i][2] = R;
+			qarr[i][3] = i;
+		}
+		qsort(arr, N, sizeof(int) * 2, cmp);	//按照高度排序
+		qsort(qarr, M, sizeof(int) * 4, cmp);	//按照高度排序
+		int index = 0;
+		for (int i = 0; i < M; i++)
+		{
+			while (index < N&&arr[index][0]<=qarr[i][0])
+			{
+				add(tree, arr[index][1], N);
+				//磚塊高度越矮的從他的索引到整條陣列都一定可以跳過他
+				index++;
+			}
+			Ans[qarr[i][3]] = query(tree, qarr[i][1], qarr[i][2]);
+			//arr[0]~arr[R]的加總減去arr[0]~arr[L-1]即為arr[L]~arr[R](區間減法原理)
+		}
+		printf("Case %d:\n", t);
+		for (int i = 0; i < M; i++)
+		{
+			printf("%d\n", Ans[i]);
+		}
+		system("pause");
+	}
+}

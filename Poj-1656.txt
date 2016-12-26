@@ -1,0 +1,33 @@
+#include<stdio.h>
+
+int main()
+{
+    int wb[101][101],t,i,j,x,y,l,n;
+    char cz[6];
+    for(i=0;i<101;i++)//初始化 
+        for(j=0;j<101;j++)
+            wb[i][j]=0;
+    scanf("%d",&t);
+    while(t)
+    {
+        scanf("%s",cz);
+        n=0;
+        scanf("%d%d%d",&x,&y,&l);
+        if(cz[0]=='B')//區塊塗黑 
+            for(i=x;i<=x+l-1;i++)
+                for(j=y;j<=y+l-1;j++)
+                    wb[i][j]=1;
+        else if(cz[0]=='W')//區塊塗白
+             for(i=x;i<=x+l-1;i++)
+                for(j=y;j<=y+l-1;j++)
+                    wb[i][j]=0;
+        else if(cz[0]=='T')//加總 算黑的 
+            {
+                 for(i=x;i<=x+l-1;i++)
+                    for(j=y;j<=y+l-1;j++)
+                        n+=wb[i][j];
+                printf("%d\n",n);
+            }
+        t--;                                
+    }
+}

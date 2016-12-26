@@ -1,0 +1,37 @@
+#include <stdlib.h>
+ 
+int main()
+{
+	int t, n, len, ant;
+	int left, right;
+	int earliest, latest;
+	scanf("%d", &t);
+	while(t--)
+	{
+		/* 初始化 */
+		earliest = -1;
+		latest = -1;
+		scanf("%d%d", &len, &n);
+		while(n--)
+		{
+			scanf("%d", &ant);
+			/* 對每隻螞蟻求兩個時間 */
+			left = ant;
+			right = len - ant;
+			/* 求較短時間的最大值和較長時間的最大值 */
+			if (left < right)
+			{
+				if (left > earliest) earliest = left;
+				if (right > latest) latest = right;
+			}
+			else
+			{
+				if (right > earliest) earliest = right;
+				if (left > latest) latest = left;
+			}
+		}
+		printf("%d %d\n", earliest, latest);
+	}
+	//system("pause");
+	return 0;
+}
