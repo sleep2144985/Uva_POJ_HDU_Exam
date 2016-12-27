@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+int main() {
+	double Ka;  
+	double ori;  
+	int m;    
+	int n;      
+	double H;    
+
+	while (1)
+	{
+		scanf("%lf", &Ka);
+		scanf("%lf", &ori);
+		scanf("%d", &m);
+		scanf("%d", &n);
+
+		if (Ka == 0 && ori == 0 && m == 0 && n == 0)
+			break;
+
+		H = (sqrt(Ka*Ka + 4 * m*n*Ka*ori) - Ka) / (2 * n);
+		printf("%.3f\n", -log10(H));
+	}
+}
