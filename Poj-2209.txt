@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+int main()
+{
+    int n,e,son[105];
+    while(~scanf("%d",&n))
+    {
+        int cha=0;
+        scanf("%d",&e);
+        for(int i=0;i<n;i++)
+            scanf("%d",&son[i]);
+        if(e==3)
+        {
+            for(int i=0;i<n;i++)
+                if(son[i]>0)
+                    cha+=son[i]*son[i]*son[i];
+        }
+        else if(e==2)
+        {
+            for(int i=0;i<n;i++)
+                    cha+=son[i]*son[i];
+        }
+        else if(e==1)
+        {
+            for(int i=0;i<n;i++)
+                if(son[i]>0)
+                    cha+=son[i];
+        }
+        printf("%d\n",cha);
+    }
+    return 0;
+}
+//e¤£¶W¹L3
